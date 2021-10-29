@@ -4,6 +4,7 @@ import PizZip from 'pizzip'
 import fs from 'fs';
 import path from 'path';
 import { argv } from 'process';
+import { config } from './config';
 
 const months = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'];
 
@@ -36,7 +37,8 @@ class App {
     private generateDoc(): void {
         this.doc.render(this.result);
         let buf = this.doc.getZip().generate({ type: 'nodebuffer' });
-        fs.writeFileSync(path.resolve(__dirname, 'KESU/' + this.result.year + '_' + this.month + '_Lipiec_KEŚU.docx'), buf);
+        fs.mkdirSync(path.resolve(__dirname, 'KESU'), { recursive: true });
+        fs.writeFileSync(path.resolve(__dirname, 'KESU/' + config.filenameTemplate(this.result.year, this.month)), buf);
     }
 
     private processTimelog(): void {

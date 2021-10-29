@@ -8,6 +8,7 @@ var pizzip_1 = __importDefault(require("pizzip"));
 var fs_1 = __importDefault(require("fs"));
 var path_1 = __importDefault(require("path"));
 var process_1 = require("process");
+var config_1 = require("./config");
 var months = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'];
 var arg0 = process_1.argv[0], arg1 = process_1.argv[1], timelogPath = process_1.argv[2];
 var App = /** @class */ (function () {
@@ -34,7 +35,8 @@ var App = /** @class */ (function () {
     App.prototype.generateDoc = function () {
         this.doc.render(this.result);
         var buf = this.doc.getZip().generate({ type: 'nodebuffer' });
-        fs_1.default.writeFileSync(path_1.default.resolve(__dirname, 'KESU/' + this.result.year + '_' + this.month + '_Lipiec_KEŚU.docx'), buf);
+        fs_1.default.mkdirSync(path_1.default.resolve(__dirname, 'KESU'), { recursive: true });
+        fs_1.default.writeFileSync(path_1.default.resolve(__dirname, 'KESU/' + config_1.config.filenameTemplate(this.result.year, this.month)), buf);
     };
     App.prototype.processTimelog = function () {
         var rawRows = this.timelog.toString().split('\n');
