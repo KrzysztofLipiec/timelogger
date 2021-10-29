@@ -10,8 +10,8 @@ const months = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'L
 
 let [arg0, arg1, timelogPath] = argv;
 class App {
-    private template = fs.readFileSync(path.resolve(__dirname, "KESU_Template.docx"), 'binary');
-    private timelog = fs.readFileSync(path.resolve(__dirname, "timelogs/" + timelogPath));
+    private template = fs.readFileSync("./KESU_Template.docx", 'binary');
+    private timelog = fs.readFileSync("./timelogs/" + timelogPath);
     private month = '';
     private doc: Docxtemplater;
     private result: any = {};
@@ -37,8 +37,8 @@ class App {
     private generateDoc(): void {
         this.doc.render(this.result);
         let buf = this.doc.getZip().generate({ type: 'nodebuffer' });
-        fs.mkdirSync(path.resolve(__dirname, 'KESU'), { recursive: true });
-        fs.writeFileSync(path.resolve(__dirname, 'KESU/' + config.filenameTemplate(this.result.year, this.month)), buf);
+        fs.mkdirSync('KESU', { recursive: true });
+        fs.writeFileSync('KESU/' + config.filenameTemplate(this.result.year, this.month), buf);
     }
 
     private processTimelog(): void {
