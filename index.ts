@@ -38,13 +38,13 @@ class App {
         this.doc.render(this.result);
         let buf = this.doc.getZip().generate({ type: 'nodebuffer' });
         fs.mkdirSync('KESU', { recursive: true });
-        fs.writeFileSync('KESU/' + config.filenameTemplate(this.result.year, this.month), buf);
+        fs.writeFileSync('KESU/' + config.szablonNazwyPlikuWynikowego(this.result.year, this.month), buf);
     }
 
     private processTimelog(): void {
         let rawRows = this.timelog.toString().split('\n');
         let rows: Array<any> = [];
-        rawRows.forEach((row) => {
+        rawRows.forEach((row: any) => {
             rows.push(row.split(';'));
         });
         let iterator = 0;
@@ -61,10 +61,10 @@ class App {
                 iterator++;
                 let day = rows[0][colIndex];
                 let dayNo = parseInt(day.substring(day.length - 2));
-                this.result['place' + dayNo] = 'Łódź';
+                this.result['place' + dayNo] = config.domyslneMiejscePracy;
                 this.result['tasks' + dayNo] = dayTasks.join('\n');
-                this.result['time' + dayNo] = '9-17';
-                this.result['daysum' + dayNo] = '8';
+                this.result['time' + dayNo] = config.domyslneGodzinyPracy;
+                this.result['daysum' + dayNo] = config.domyslnyCzasPracy;
             }
         }
 

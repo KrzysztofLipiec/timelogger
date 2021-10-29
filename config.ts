@@ -1,3 +1,6 @@
 export const config = {
-    filenameTemplate: function (year: string, month: string) { return year + '_' + month + '_Lipiec_KEŚU.docx'; }
+    domyslneGodzinyPracy: '9-17',
+    domyslneMiejscePracy: 'Łódź',
+    domyslnyCzasPracy: '8',
+    szablonNazwyPlikuWynikowego: (year: string, month: string) => `${year}_${month}_Lipiec_KEŚU.docx`
 };
