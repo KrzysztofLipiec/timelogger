@@ -1,6 +1,6 @@
 przyklad uzycia:
 
-skonfiguruj szablon nazwy wynikowego pliku w dist/config.js 
+skonfiguruj szablon nazwy wynikowego pliku w config.ts
 
 skopiuj plik wygenerowany w redmine do folderu 'timelogs'
 
