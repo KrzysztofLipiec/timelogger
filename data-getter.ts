@@ -28,10 +28,10 @@ export class DataGetter {
                 this.result['daysum' + day] = parseFloat(this.result['daysum' + day]) + entry.hours;
             } else {
                 this.result['daysum' + day] = entry.hours;
-                if (this.result['daysum' + day] === 7.5) {
-                    this.result['daysum' + day] = 8;
-                    sum += 0.5;
-                }
+            }
+            if (this.result['daysum' + day] === 7.5) {
+                this.result['daysum' + day] = 8;
+                sum += 0.5;
             }
             sum += entry.hours;
         });
